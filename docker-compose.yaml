@@ -1,0 +1,39 @@
+services:
+  api-rest-cliente-transbank:
+    build: ./api-rest-cliente-transbank
+    ports:
+      - "8900:8900"
+    volumes:
+      - ./api-rest-cliente-transbank/:/opt/app/api-rest-cliente-transbank
+    networks:
+      - transbank-net      
+
+  portal-web:
+    build: ./portal-web
+    ports:
+      - "9100:80"
+    volumes:
+      - ./portal-web/:/var/www/localhost/htdocs/portal-web
+    networks:
+      - transbank-net      
+
+  api-bcentral:
+    build: ./api-bcentral
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./api-bcentral/:/opt/app/api-bcentral
+    networks:
+      - transbank-net      
+
+  api-sql:
+    build: ./api-sql
+    ports:
+      - "6000:6000"
+    volumes:
+      - ./api-sql/:/opt/app/api-sql
+    networks:
+      - transbank-net      
+
+networks:
+  transbank-net:
